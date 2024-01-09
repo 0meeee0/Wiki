@@ -8,29 +8,55 @@ class UserDao {
         $this->pdo = DatabaseConnection::getInstance()->getConnection(); 
     }
 
-    public function login($email,$password){
-        $query = "SELECT * FROM users WHERE email = :email AND password = :password;";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindparam(':email', $email, PDO::PARAM_STR);
+    public function login($email, $password){
+    $query = "SELECT * FROM users WHERE email = :email;";
+    $stmt = $this->pdo->prepare($query);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
 
-        $stmt->bindparam(':password', $password, PDO::PARAM_STR);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $number_of_users = count($result);
-        if( $number_of_users == 1 ){
-            // echo "dkhl";
-            header("Location:view/home.html");
-        }else{
-            echo "la";
-            header("Location:index.php");
-            // echo "no";
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        $hashedPassword = $user['password']; // Assuming the hashed password is stored in the 'password' column
+
+        // Verify the password
+        if (password_verify($password, $hashedPassword)) {
+            // Password is correct
+            header("Location: index.php?action=showhome");
+        } else {
+            // Incorrect password
+            header("Location: index.php");
         }
+    } else {
+        // User not found
+        header("Location: index.php");
+    }
+}
 
+
+    public function singup($username, $email, $password) {
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $role = 'auteur';
+
+        $query = "INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, :role)";
+        $stmt = $this->pdo->prepare($query);
+
+        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
+        $stmt->bindParam(':role', $role, PDO::PARAM_STR);
+        $stmt->execute();
+
+        // Check if the user was successfully created
+        if ($stmt->rowCount() > 0) {
+            echo "User created successfully!";
+            header("Location:index.php");
+        } else {
+            echo "Error creating user.";
+        }
     }
-    public function createUser(User $user) {
-        // Implement the logic to insert a new user into the database
-        // Make use of prepared statements to prevent SQL injection
-    }
+
 
     public function getUserById($user_id) {
         // Implement the logic to retrieve a user by user_id from the database

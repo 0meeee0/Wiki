@@ -45,3 +45,42 @@ CREATE TABLE wiki_tags (
     FOREIGN KEY (wiki_id) REFERENCES wikis(wiki_id),
     FOREIGN KEY (tag_id) REFERENCES tags(tag_id)
 );
+
+-- Insert random values into categories table
+INSERT INTO categories (category_name) VALUES
+    ('Technology'),
+    ('Science'),
+    ('History'),
+    ('Art');
+
+-- Insert random values into users table
+INSERT INTO users (username, email, password, role) VALUES
+    ('JohnDoe', 'john@example.com', 'hashed_password_1', 'auteur'),
+    ('JaneDoe', 'jane@example.com', 'hashed_password_2', 'admin'),
+    ('Alice', 'alice@example.com', 'hashed_password_3', 'auteur'),
+    ('Bob', 'bob@example.com', 'hashed_password_4', 'auteur');
+
+-- Insert random values into wikis table
+INSERT INTO wikis (user_id, category_id, title, content, date_created, archived) VALUES
+    (1, 1, 'Introduction to Programming', 'Lorem Ipsum is simply dummy text of the printing...', '2024-01-09 12:00:00', 0),
+    (2, 2, 'The Theory of Relativity', 'Albert Einstein revolutionized our understanding of...', '2024-01-10 14:30:00', 0),
+    (3, 3, 'Ancient Rome', 'The history of Ancient Rome spans a millennium...', '2024-01-11 09:45:00', 1),
+    (4, 4, 'Impressionist Art Movement', 'Impressionism was an art movement that emerged in the late 19th century...', '2024-01-12 16:20:00', 0);
+
+-- Insert random values into tags table
+INSERT INTO tags (tag_name) VALUES
+    ('Programming'),
+    ('Physics'),
+    ('History'),
+    ('Art');
+
+-- Insert random values into wiki_tags table
+INSERT INTO wiki_tags (wiki_id, tag_id) VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (1, 3),
+    (2, 4),
+    (3, 1),
+    (4, 2);

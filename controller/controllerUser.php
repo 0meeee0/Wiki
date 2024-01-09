@@ -3,12 +3,18 @@
 include 'model\UserDAO.php';
 
 class controller_users{
-    function login(){
+    function log_in(){
         extract($_POST);
         $usersDAO = new UserDao();
         $usersDAO->login($email,$password);
     }
-
+    function sign_up(){
+        extract($_POST);
+        $usersDAO = new UserDao();
+        var_dump($username, $email, $password);
+        $usersDAO->singup($username, $email, $password);
+        
+    }
 }
 
 
