@@ -8,7 +8,7 @@ class UserDao {
         $this->pdo = DatabaseConnection::getInstance()->getConnection(); 
     }
 
-    public function login($email, $password){
+    public function login($email, $password) {
     $query = "SELECT * FROM users WHERE email = :email;";
     $stmt = $this->pdo->prepare($query);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
@@ -21,17 +21,21 @@ class UserDao {
 
         // Verify the password
         if (password_verify($password, $hashedPassword)) {
-            // Password is correct
+            $_SESSION['author_name'] = $user[0]['author_name'];
             header("Location: index.php?action=showhome");
+            exit(); // Add exit to stop script execution after redirect
         } else {
             // Incorrect password
             header("Location: index.php");
+            exit(); // Add exit to stop script execution after redirect
         }
     } else {
         // User not found
         header("Location: index.php");
+        exit(); // Add exit to stop script execution after redirect
     }
 }
+
 
 
     public function singup($username, $email, $password) {

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class WikiDao {
     private $pdo;
 
@@ -7,9 +7,31 @@ class WikiDao {
         $this->pdo = DatabaseConnection::getInstance()->getConnection(); 
     }
 
-    public function createWiki(Wiki $wiki) {
-        // Implement the logic to insert a new wiki into the database
+    public function createWiki($title, $category, $tag, $content, $image) {
+    try {
+        $user_id = $_SESSION['user']; 
+        $category_id = 1;  // Replace with the actual category_id
+
+        $query = "INSERT INTO wikis (user_id, category_id, title, content, date_created, archived)
+                  VALUES (:user_id, :category_id, :title, :content, NOW(), 0)";
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindValue(':category_id', $category_id, PDO::PARAM_INT);
+        $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+        $stmt->bindValue(':content', $content, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        // You can return the last inserted ID if needed
+        return $this->pdo->lastInsertId();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
     }
+}
+
+
 
     public function getWikiData() {
         try {
@@ -17,7 +39,7 @@ class WikiDao {
                       FROM wikis w
                       INNER JOIN users u ON w.user_id = u.user_id
                       WHERE w.archived = 0
-                      ORDER BY w.date_created DESC";
+                      ORDER BY w.date_created ASC";
 
             $stmt = $this->pdo->prepare($query);
             $stmt->execute();
