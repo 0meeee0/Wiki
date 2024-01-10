@@ -40,7 +40,7 @@
 				<div class="row">
 					<div class="col-md-5 wrapthumbnail">
 						<a href="index.php?action=thepost">
-							<div class="thumbnail" style="background-image:url(https://intranet.youcode.ma/storage/users/profile/735-1696417328.jpg);">
+							<div class="thumbnail" style="background-image:url(https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png);">
 							</div>
 						</a>
 					</div>
@@ -51,11 +51,11 @@
 							<div class="metafooter">
 								<div class="wrapfooter">
 									<span class="meta-footer-thumb">
-										<a href="author.html"><img class="author-thumb" src="https://intranet.youcode.ma/storage/users/profile/735-1696417328.jpg" alt="<?php echo $row['author_name']; ?>"></a>
+										<a href="author.html"><img class="author-thumb" src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="<?php echo $row['author_name']; ?>"></a>
 									</span>
 									<span class="author-meta">
 										<span class="post-name"><a href="author.html"><?php echo $row['author_name']; ?></a></span><br/>
-										<span class="post-date"><?php echo date('d F Y', strtotime($row['date_created'])); ?></span><span class="dot"></span>
+										<span class="post-date"><?php echo date('d F Y', strtotime($row['date_created'])); ?></span>
 									</span>
 								</div>
 							</div>
@@ -96,12 +96,8 @@
 </div>
 <!-- /.container -->
 
-<!-- Bootstrap core JavaScript
-    ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+<?php
+	include 'foot.php';
+?>
 </body>
 </html>

@@ -6,7 +6,7 @@
 </button>
 <div class="container">
 	<!-- Begin Logo -->
-	<a class="navbar-brand" href="#">
+	<a class="navbar-brand" href="?action=showhome">
 	<p>WIKICODE</p>
 	</a>
 	<!-- End Logo -->
@@ -23,15 +23,15 @@
 			<a class="nav-link" href="">Author</a>
 			</li>
 			<li class="nav-item">
-			<a class="nav-link" href="index.php?action=addpost">New</a>
+			<a class="nav-link" href="?action=addpost">New</a>
 			</li>
 		</ul>
 		<!-- End Menu -->
 		<!-- Begin Search -->
-		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="text" placeholder="Search">
-			<span class="search-icon"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path></svg></span>
-		</form>
+		<form class="form-inline my-2 my-lg-0" action="index.php" method="get">
+            <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search for a Title">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+        </form>
 		<!-- End Search -->
 	</div>
 </div>

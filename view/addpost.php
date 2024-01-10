@@ -12,35 +12,38 @@
 ?>
 
 
-<div class="container">
+<div class="container col-md-6 col-xs-10">
         <div class="container">
             <div class="mainheading">
-                <h1 class="sitetitle">WIKI<span style="color: grey;">CODE</span></h1>
+                <h1 class="sitetitle">WIKI<span class="text-success">CODE</span></h1>
                 <p class="lead">
-                    Create and Share Knowledge Together!
+                    What's On Your Mind? 
+                    <!-- <?php var_dump($categories) ?>  -->
                 </p>
             </div>
         <form action="index.php?action=adding" class="login-form" method="post">
-            <div class="form-group">
-                <div class="icon d-flex align-items-center justify-content-center"></div>
+            <div class="form-group"> 
                 <input type="text" name="title" class="form-control" placeholder="Title" required>
             </div>
-            <div class="form-group">
-                <div class="icon d-flex align-items-center justify-content-center"></div>
-                <input type="text" name="category" class="form-control" placeholder="Category" required>
+            <div class="form-group"> 
+                <select name="category" class="form-control" required>
+                    <?php foreach ($categories as $category): ?>
+                        <option value="<?= $category["category_id"]; ?>">
+                            <?= $category["category_name"]; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+
             </div>
-            <div class="form-group">
-                <div class="icon d-flex align-items-center justify-content-center"></div>
+            <div class="form-group"> 
                 <input type="text" name="tag" class="form-control" placeholder="Tags" required>
             </div>
-            <div class="form-group">
-                <div class="icon d-flex align-items-center justify-content-center"></div>
+            <div class="form-group"> 
                 <label for="content">Content</label>
                 <textarea name="content" class="form-control" placeholder="Content" required></textarea>
             </div>
             <div class="form-group">
-                <label for="image">Image</label>
-                <div class="icon d-flex align-items-center justify-content-center"></div>
+                <label for="image">Image</label> 
                 <input type="file" name="image" class="form-control" required>
             </div>
             <div class="form-group">
@@ -58,11 +61,6 @@
 		<p class="text-center">
 			 Copyright &copy; 2024 WIKICODE
 		</p>
-		<!-- <p class="pull-right">
-			 All rights are reserved <a target="_blank" href="https://www.wowthemes.net">WowThemes.net</a>
-		</p>
-		<div class="clearfix">
-		</div> -->
 	</div>
 	<!-- End Footer
 	================================================== -->
@@ -71,11 +69,8 @@
 <!-- /.container -->
 
 <!-- Bootstrap core JavaScript
-    ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+<?php
+	include 'foot.php';
+?>
 </body>
 </html>

@@ -2,9 +2,9 @@
 class TagDao {
     private $pdo;
 
-    public function __construct(PDO $pdo) {
-        $this->pdo = $pdo;
-    }
+    public function __construct(){
+        $this->pdo = DatabaseConnection::getInstance()->getConnection(); 
+    } 
 
     public function createTag(Tag $tag) {
         // Implement the logic to insert a new tag into the database

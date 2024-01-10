@@ -10,7 +10,7 @@ class WikiDao {
     public function createWiki($title, $category, $tag, $content, $image) {
     try {
         $user_id = $_SESSION['user']; 
-        $category_id = 1;  // Replace with the actual category_id
+        $category_id = 1;
 
         $query = "INSERT INTO wikis (user_id, category_id, title, content, date_created, archived)
                   VALUES (:user_id, :category_id, :title, :content, NOW(), 0)";

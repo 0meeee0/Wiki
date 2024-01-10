@@ -21,7 +21,7 @@ class UserDao {
 
         // Verify the password
         if (password_verify($password, $hashedPassword)) {
-            $_SESSION['author_name'] = $user[0]['author_name'];
+            $_SESSION['author_name'] = $user['author_name'];
             header("Location: index.php?action=showhome");
             exit(); // Add exit to stop script execution after redirect
         } else {

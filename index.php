@@ -37,11 +37,16 @@ if (isset($_GET["action"])) {
 
         case "addpost":
             // header('location: index.php?action=addpost');
-            include 'view/addpost.php';
+            // include 'view/addpost.php';
+            $wiki->add_wiki();
             break;
 
         case "adding":
             $wiki->add_wiki();
+            break;
+        
+        case "showForm":
+            $controller->displayForm();
             break;
 
         default:

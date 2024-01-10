@@ -60,9 +60,8 @@
 						<a href="author.html"><img class="author-thumb" src="https://intranet.youcode.ma/storage/users/profile/735-1696417328.jpg" alt="Sal"></a>
 					</div>
 					<div class="col-md-10">
-						<a class="link-dark" href="author.html">Othmane</a><a href="#" class="btn follow">Follow</a>
-						<span class="author-description">Founder of WowThemes.net and creator of <b>"Mediumish"</b> theme that you're currently previewing. Developing professional premium themes, templates, plugins, scripts since 2012.</span>
-						<span class="post-date">22 July 2017</span><span class="dot"></span><span class="post-read">6 min read</span>
+						<a class="link-dark" href="author.html">Othmane</a><a href="#" class="btn follow">Follow</a><br>
+						<span class="author-description">3tman sadi9 <b>kamal</b> 3tman sadi9 <b>kamal</b> 3tman sadi9 <b>kamal</b> 3tman sadi9 <b>kamal</b> 3tman sadi9 <b>kamal</b> 3tman sadi9 <b>kamal</b> 3tman sadi9 <b>kamal</b> </span>
 					</div>
 				</div>
 				<!-- End Top Menta -->
@@ -123,13 +122,6 @@
 <!-- End Twitter Timeline
 ================================================== -->
 
-<!-- Begin AlertBar
-================================================== -->
-<div class="alertbar">
-	<div class="container text-center">
-		<img src="assets/img/logo.png" alt=""> &nbsp; Never miss a <b>story</b> from us, get weekly updates in your inbox. <a href="#" class="btn subscribe">Get Updates</a>
-	</div>
-</div>
 <!-- End AlertBar
 ================================================== -->
 
@@ -151,12 +143,8 @@
 ================================================== -->
 
 <!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
-<script src="assets/js/mediumish.js"></script>
+<?php
+	include 'foot.php';
+?>
 </body>
 </html>
