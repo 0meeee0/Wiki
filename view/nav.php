@@ -17,12 +17,6 @@
 			<a class="nav-link" href="index.php?action=showhome">Home <span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-			<a class="nav-link" href="">Post</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="">Author</a>
-			</li>
-			<li class="nav-item">
 			<a class="nav-link" href="?action=addpost">New</a>
 			</li>
 		</ul>

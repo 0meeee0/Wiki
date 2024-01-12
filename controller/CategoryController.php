@@ -14,6 +14,12 @@ class CategoryController {
         $this->categoryDao->createCategory($category);
     }
 
+    function getcats(){
+        $categoryDAO = new CategoryDAO();
+        $cat = $categoryDAO->getCategories();
+        include 'view\dashboard.php';
+    }
+
     public function displayForm()
     {
         $categories = $this->categoryDao->getCategories();

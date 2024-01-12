@@ -8,6 +8,23 @@ class UserDao {
         $this->pdo = DatabaseConnection::getInstance()->getConnection(); 
     }
 
+    public function getUsersData() {
+        try {
+            $query = "SELECT user_id, username, email, role FROM users";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+
+            // Fetch data as an associative array
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
+        } catch (PDOException $e) {
+            // Handle database connection error
+            echo "Error: " . $e->getMessage();
+            return array(); // Return an empty array on error
+        }
+    }
+
     public function login($email, $password) {
     $query = "SELECT * FROM users WHERE email = :email;";
     $stmt = $this->pdo->prepare($query);
@@ -21,9 +38,15 @@ class UserDao {
 
         // Verify the password
         if (password_verify($password, $hashedPassword)) {
-            $_SESSION['author_name'] = $user['author_name'];
-            header("Location: index.php?action=showhome");
-            exit(); // Add exit to stop script execution after redirect
+            $_SESSION['username'] = $user['username'];
+            if($user['role'] == "auteur"){
+                include "index.php?action=showhome";
+                header("Location: index.php?action=showhome");
+
+            }
+            else {
+                header("Location: index.php?action=admin");
+            }
         } else {
             // Incorrect password
             header("Location: index.php");

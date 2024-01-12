@@ -16,6 +16,9 @@
 <div class="container">
 	<div class="mainheading">
 		<h1 class="sitetitle">WIKI<span style="color: grey;">CODE</span></h1>
+		<!-- <?php
+			echo $user['role'];
+		?> -->
 		<p class="lead">
 			 Explore, Create and Share Knowledge Together!
 		</p>
@@ -39,22 +42,22 @@
 			<div class="card">
 				<div class="row">
 					<div class="col-md-5 wrapthumbnail">
-						<a href="index.php?action=thepost">
+						<a href="index.php?action=thepost&id=<?php echo $row["wiki_id"]?>">
 							<div class="thumbnail" style="background-image:url(https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png);">
 							</div>
 						</a>
 					</div>
 					<div class="col-md-7">
 						<div class="card-block">
-							<h2 class="card-title"><a href="index.php?action=thepost"><?php echo $row['title']; ?></a></h2>
+							<h2 class="card-title"><a href="index.php?action=thepost&id=<?php echo $row["wiki_id"]?>"><?php echo $row['title']; ?></a></h2>
 							<h4 class="card-text"><?php echo $row['content']; ?></h4>
 							<div class="metafooter">
 								<div class="wrapfooter">
 									<span class="meta-footer-thumb">
-										<a href="author.html"><img class="author-thumb" src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="<?php echo $row['author_name']; ?>"></a>
+										<img class="author-thumb" src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="<?php echo $row['author_name']; ?>">
 									</span>
 									<span class="author-meta">
-										<span class="post-name"><a href="author.html"><?php echo $row['author_name']; ?></a></span><br/>
+										<span class="post-name"><a href=""><?php echo $row['author_name']; ?></a></span><br/>
 										<span class="post-date"><?php echo date('d F Y', strtotime($row['date_created'])); ?></span>
 									</span>
 								</div>

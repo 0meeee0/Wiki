@@ -20,13 +20,23 @@ class WikiController {
         // var_dump($shi);
         include 'view\home.php';
     }
+    function get_wiki_for_display(){
+        $id = isset($_GET['id'])? $_GET['id']:0;
+        // extract($_POST);
+        $getWiki = new WikiDao();
+        $shi = $getWiki->getWikiById($id);
+        // var_dump($shi);
+        include 'view\post.php';
+    }
     function add_wiki(){
+        $categories = $this->categoryDao->getCategories();
+        include "view\addpost.php";
         extract($_POST);
         $addWiki = new Wikidao();
-        $categories = $this->categoryDao->getCategories();
+        
 
-        // $addWiki->createWiki($title, $category, $tag, $content, $image);
-        include "view\addpost.php";
+        $addWiki->createWiki($title, $category, $tag, $content);
+        
     }
     
 }

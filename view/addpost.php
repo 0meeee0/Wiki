@@ -21,11 +21,12 @@
                     <!-- <?php var_dump($categories) ?>  -->
                 </p>
             </div>
-        <form action="index.php?action=adding" class="login-form" method="post">
+        <form action="index.php?action=adding" class="login-form" method="post" enctype="multipart/form-data">
             <div class="form-group"> 
                 <input type="text" name="title" class="form-control" placeholder="Title" required>
             </div>
             <div class="form-group"> 
+                <label for="category">Category</label>
                 <select name="category" class="form-control" required>
                     <?php foreach ($categories as $category): ?>
                         <option value="<?= $category["category_id"]; ?>">
@@ -36,16 +37,23 @@
 
             </div>
             <div class="form-group"> 
-                <input type="text" name="tag" class="form-control" placeholder="Tags" required>
+                <label for="tag">Tag</label>
+                 <select name="tag" class="form-control" required>
+                    <?php foreach ($tags as $tag): ?>
+                        <option value="<?= $category["tag_id"]; ?>">
+                            <?= $category["tag_name"]; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="form-group"> 
                 <label for="content">Content</label>
                 <textarea name="content" class="form-control" placeholder="Content" required></textarea>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="image">Image</label> 
                 <input type="file" name="image" class="form-control" required>
-            </div>
+            </div> -->
             <div class="form-group">
                 <button type="submit" class="btn form-control btn-success rounded submit px-3">Add Wiki</button>
             </div>

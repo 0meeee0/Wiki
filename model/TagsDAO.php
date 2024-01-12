@@ -6,6 +6,15 @@ class TagDao {
         $this->pdo = DatabaseConnection::getInstance()->getConnection(); 
     } 
 
+    public function getTags()
+    {
+        $sql = "SELECT tag_id, tag_name FROM tags";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function createTag(Tag $tag) {
         // Implement the logic to insert a new tag into the database
     }

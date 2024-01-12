@@ -9,6 +9,11 @@ class TagController {
     public function __construct(TagDao $tagDao) {
         $this->tagDao = $tagDao;
     }
+    public function displayFormm()
+    {
+        $categories = $this->tagDao->getTags();
+        include 'view\addpost.php';
+    }
 
     public function createTag($tagName) {
         // Validate input

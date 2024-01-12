@@ -7,10 +7,14 @@ class WikiDao {
         $this->pdo = DatabaseConnection::getInstance()->getConnection(); 
     }
 
-    public function createWiki($title, $category, $tag, $content, $image) {
+    public function createWiki($title, $category, $tag, $content) {
     try {
         $user_id = $_SESSION['user']; 
         $category_id = 1;
+
+        // Sanitize user inputs to prevent XSS
+        $title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+        $content = htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
 
         $query = "INSERT INTO wikis (user_id, category_id, title, content, date_created, archived)
                   VALUES (:user_id, :category_id, :title, :content, NOW(), 0)";
@@ -25,7 +29,7 @@ class WikiDao {
 
         // You can return the last inserted ID if needed
         return $this->pdo->lastInsertId();
-    } catch (PDOException $e) {
+    }catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
         return false;
     }
@@ -76,13 +80,72 @@ class WikiDao {
         }
     }
 
-    public function updateWiki(Wiki $wiki) {
-        // Implement the logic to update a wiki in the database
+    public function updateWiki($wikiId, $title, $category_id, $tag, $content) {
+    try {
+        $user_id = $_SESSION['user'];
+
+        // Check if the wiki exists
+        if (!$this->wikiExists($wikiId)) {
+            echo "Wiki not found.";
+            return false;
+        }
+
+        // Update data in the database
+        $query = "UPDATE wikis
+                  SET user_id = :user_id,
+                      category_id = :category_id,
+                      title = :title,
+                      content = :content,
+                      date_updated = NOW()
+                  WHERE wiki_id = :wiki_id";
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindValue(':category_id', $category_id, PDO::PARAM_INT);
+        $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+        $stmt->bindValue(':content', $content, PDO::PARAM_STR);
+        $stmt->bindValue(':wiki_id', $wikiId, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
+    // Helper function to check if a wiki with the given ID exists
+    private function wikiExists($wikiId) {
+        $query = "SELECT COUNT(*) FROM wikis WHERE wiki_id = :wiki_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':wiki_id', $wikiId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchColumn() > 0;
     }
 
-    public function deleteWiki($wiki_id) {
-        // Implement the logic to delete a wiki from the database
+
+    public function deleteWiki($wikiId) {
+    try {
+        // Check if the wiki exists
+        if (!$this->wikiExists($wikiId)) {
+            echo "Wiki not found.";
+            return false;
+        }
+
+        // Delete the wiki from the database
+        $query = "DELETE FROM wikis WHERE wiki_id = :wiki_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':wiki_id', $wikiId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
     }
+}
 }
 
 ?>

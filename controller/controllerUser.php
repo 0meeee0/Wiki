@@ -8,14 +8,19 @@ class controller_users{
         $usersDAO = new UserDao();
         $usersDAO->login($email,$password);
     }
+    
     function sign_up(){
         extract($_POST);
         $usersDAO = new UserDao();
         var_dump($username, $email, $password);
         $usersDAO->singup($username, $email, $password);
-        
+    }
+
+    function getusers(){
+        $usersDAO = new UserDAO();
+        $fadi = $usersDAO->getUsersData();
+        include 'view\dashboard.php';
     }
 }
-
 
 ?>

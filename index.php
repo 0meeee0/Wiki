@@ -2,8 +2,10 @@
     
 include 'controller/controllerUser.php';
 include 'controller/wikicontroller.php';
+include 'controller/CategoryController.php';
 
 $user = new controller_users();
+$category = new CategoryController();
 $wiki = new WikiController();
 
 if (isset($_GET["action"])) {
@@ -32,12 +34,10 @@ if (isset($_GET["action"])) {
             break;
 
         case "thepost":
-            include 'view/post.php';
+            $wiki->get_wiki_for_display();
             break;
 
         case "addpost":
-            // header('location: index.php?action=addpost');
-            // include 'view/addpost.php';
             $wiki->add_wiki();
             break;
 
@@ -47,6 +47,11 @@ if (isset($_GET["action"])) {
         
         case "showForm":
             $controller->displayForm();
+            break;
+
+        case "admin":
+            $user->getusers();
+            $category->getcats();
             break;
 
         default:
