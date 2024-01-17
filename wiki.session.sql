@@ -53,13 +53,6 @@ INSERT INTO categories (category_name) VALUES
     ('History'),
     ('Art');
 
--- Insert random values into users table
-INSERT INTO users (username, email, password, role) VALUES
-    ('JohnDoe', 'john@example.com', 'hashed_password_1', 'auteur'),
-    ('JaneDoe', 'jane@example.com', 'hashed_password_2', 'admin'),
-    ('Alice', 'alice@example.com', 'hashed_password_3', 'auteur'),
-    ('Bob', 'bob@example.com', 'hashed_password_4', 'auteur');
-
 -- Insert random values into wikis table
 INSERT INTO wikis (user_id, category_id, title, content, date_created, archived) VALUES
     (1, 1, 'Introduction to Programming', 'Lorem Ipsum is simply dummy text of the printing...', '2024-01-09 12:00:00', 0),
@@ -74,13 +67,3 @@ INSERT INTO tags (tag_name) VALUES
     ('History'),
     ('Art');
 
--- Insert random values into wiki_tags table
-INSERT INTO wiki_tags (wiki_id, tag_id) VALUES
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (1, 3),
-    (2, 4),
-    (3, 1),
-    (4, 2);

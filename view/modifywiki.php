@@ -21,9 +21,13 @@
                     <!-- <?php var_dump($categories) ?>  -->
                 </p>
             </div>
-        <form action="index.php?action=adding" class="login-form" method="post">
+        <form action="index.php?action=modify_action" class="login-form" method="post">
             <div class="form-group"> 
-                <input type="text" name="title" class="form-control" placeholder="Title" required>
+                <input type="text" name="id" class="form-control" hidden  placeholder="Title" value="<?= $wiki['wiki_id'] ?>" required>
+            </div>
+            <div class="form-group"> 
+                <label for="">Title</label>
+                <input type="text" name="title" class="form-control" placeholder="Title" value="<?= $wiki['title'] ?>" required>
             </div>
             <div class="form-group"> 
                 <label for="category">Category</label>
@@ -40,7 +44,13 @@
                 <label for="tag">Tag</label>
                 <div class="form-check col-1">
                      <?php foreach ($tags as $t): ?>
-                    <input name="tag[]" class="form-check-input" type="checkbox" value="<?= $t['tag_id'];?>" id="flexCheckDefault<?= $t['tag_id'];?>" >
+                        <?php if(in_array($t, $myTags)) : ?>
+                    <input name="tag[]" class="form-check-input" type="checkbox" checked value="<?= $t['tag_id'];?>" id="flexCheckDefault<?= $t['tag_id'];?>">
+                <?php else : ?>
+                    <input name="tag[]" class="form-check-input" type="checkbox" value="<?= $t['tag_id'];?>" id="flexCheckDefault<?= $t['tag_id'];?>">
+
+                    <?php endif; ?>
+
                     <label class="form-check-label" for="flexCheckDefault<?= $t['tag_id'];?>">
                         <?= $t["tag_name"];?>
                     </label>
@@ -48,12 +58,13 @@
             </div>
             <div class="form-group"> 
                 <label for="content">Content</label>
-                <textarea name="content" class="form-control" placeholder="Content" required></textarea>
+                <textarea name="content" class="form-control" placeholder="Content" required><?= $wiki['content'] ?></textarea>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn form-control btn-success rounded submit px-3">Add Wiki</button>
+                <button type="submit" class="btn form-control btn-success rounded submit px-3">Modify Wiki</button>
             </div>
         </form>
+
     </div>
 
 

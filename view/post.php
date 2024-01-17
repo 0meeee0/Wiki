@@ -62,8 +62,18 @@
 						<a href=""><img class="author-thumb" src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="Sal"></a>
 					</div>
 					<div class="col-md-10">
-						<a class="link-dark" href="author.html"><?php echo $shi["author_name"]?></a><a href="#" class="btn follow">Follow</a><br>
-						<p><?php echo $shi["category_id"]?></p>
+						<a class="link-dark" href="author.html"><b><?php echo $shi["author_name"]?></b></a>
+						<?php if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $shi['user_id']) : ?>
+							<a class="link-dark btn follow" href="index.php?action=modifyWiki&wiki_id=<?= $shi['wiki_id'] ?>">Modify</a>
+							<a class="link-dark btn follow" href="index.php?action=deleteWiki&wiki_id=<?= $shi['wiki_id'] ?>">Delete</a>
+						<?php endif; ?>
+						
+						<p><?php echo $catg['category_name'] ?></p>
+						<?php if(isset($_SESSION['user_id']) && ($_SESSION['role'] == 'admin')) : ?>
+						<div>
+							<a href="index.php?action=archive&id=<?= $shi['wiki_id'] ?>" class="btn btn-outline-warning">Archive post</a>
+						</div>		
+						<?php endif; ?>
 						<span><?php echo $shi["date_created"]?></span>
 					</div>
 				</div>
@@ -74,7 +84,7 @@
 			</div>
 
 			<!-- Begin Featured Image -->
-			<img class="featured-image img-fluid" src="https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/1200px-Wikipedia-logo-v2.svg.png" alt="">
+			<img class="featured-image img-fluid" src="https://maghreb.simplonline.co/_next/image?url=https%3A%2F%2Fsimplonline-v3-prod.s3.eu-west-3.amazonaws.com%2Fmedia%2Fimage%2Fjpg%2F10-sharing-book-cover-background-1-65949431944a4537466881.jpg&w=1280&q=75" alt="">
 			<!-- End Featured Image -->
 
 			<!-- Begin Post Content -->
@@ -88,7 +98,9 @@
 			<!-- Begin Tags -->
 			<div class="after-post-tags">
 				<ul class="tags">
-					<li><a>tag</a></li>
+					<?php foreach($tags as $tag) : ?>
+					<li><a><?= $tag['tag_name'] ?></a></li>
+					<?php endforeach; ?>
 				</ul>
 			</div>
 			<!-- End Tags -->
@@ -120,7 +132,7 @@
 <!-- End Footer
 ================================================== -->
 
-<!-- Bootstrap core JavaScript
+<!-- Bootstrap core JavaScript -->
 <?php
 	include 'foot.php';
 ?>

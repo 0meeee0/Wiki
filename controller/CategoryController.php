@@ -9,15 +9,17 @@ class CategoryController {
         $this->categoryDao = new CategoryDao();
     }
 
-    public function createCategory($categoryId, $categoryName) {
-        $category = new Category($categoryId, $categoryName);
-        $this->categoryDao->createCategory($category);
+    public function createCategory($categoryName) {
+        $category = new CategoryDAO();
+        $this->categoryDao->createCategory($categoryName);
+        header("Location: index.php?action=admin");
     }
 
     function getcats(){
         $categoryDAO = new CategoryDAO();
         $cat = $categoryDAO->getCategories();
-        include 'view\dashboard.php';
+        // include 'view\dashboard.php';
+        return $cat;
     }
 
     public function displayForm()
@@ -26,12 +28,22 @@ class CategoryController {
         include 'view\addpost.php';
     }
 
-    // public function getAllCategories() {
-    //     // Retrieve all categories from the database
-    //     return $this->categoryDao->getAllCategories();
-    // }
 
-    // Other category-related methods as needed
+    public function deleteCat()
+    {
+        $categories = $this->categoryDao->delete($_GET["id"]);
+        header("Location: index.php?action=admin");
+        
+    }
+
+    public function modify_catg() {
+        $cat_id = $_GET['catg_id'];
+        $categoryDAO = new CategoryDao();
+        $new_catg_name = $_POST['modCat'];
+        $categoryDAO->modify_catg($new_catg_name, $cat_id);
+        header('location: index.php?action=admin');
+        exit;
+    }
 }
 
 ?>

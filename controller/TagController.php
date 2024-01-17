@@ -6,28 +6,47 @@ require_once 'model\TagsDAO.php';
 class TagController {
     private $tagDao;
 
-    public function __construct(TagDao $tagDao) {
-        $this->tagDao = $tagDao;
+    public function __construct() {
+        $this->tagDao = new TagDao();
     }
+
+
     public function displayFormm()
     {
-        $categories = $this->tagDao->getTags();
+        $tagDAO = $this->tagDao->getTags();
         include 'view\addpost.php';
     }
 
-    public function createTag($tagName) {
-        // Validate input
-        // Create a new Tag object and save it to the database
-        $tag = new Tag($tagName);
-        $this->tagDao->createTag($tag);
+        function getTags(){
+        $tagDAO = new TagDAO();
+        $tags = $tagDAO->getTags();
+
+        // include 'view\dashboard.php';
+        return $tags;
     }
 
-    // public function getAllTags() {
-    //     // Retrieve all tags from the database
-    //     return $this->tagDao->getAllTags();
-    // }
+    public function createTag($tagName) {
+        $tag = new TagDAO();
+         $tagDao= $tag->createTag($tagName);
+        header("Location: index.php?action=admin");
+    }
 
-    // Other tag-related methods as needed
+    public function modifyTag(){
+        $tag_id = $_GET['id_tag'];
+        $tagDAO = new TagDao();
+        $new_name_tag = $_POST['modTag'];
+        $tag = $tagDAO->modTags($new_name_tag, $tag_id);
+        header('location: index.php?action=admin');
+        exit;
+        
+    }
+
+    public function deleteTag()
+    {
+        $tagDAO = $this->tagDao->delete($_GET["id"]);
+        header("Location: index.php?action=admin");
+        
+    }
 }
 
 ?>

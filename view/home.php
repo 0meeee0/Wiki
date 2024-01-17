@@ -16,9 +16,6 @@
 <div class="container">
 	<div class="mainheading">
 		<h1 class="sitetitle">WIKI<span style="color: grey;">CODE</span></h1>
-		<!-- <?php
-			echo $user['role'];
-		?> -->
 		<p class="lead">
 			 Explore, Create and Share Knowledge Together!
 		</p>
@@ -32,14 +29,14 @@
 	<div class="section-title">
 		<h2><span>Explore</span></h2>
 	</div>
-	<div class="card-columns listfeaturedtag">
+	<div class="row d-flex justify-content-between col-12 listfeaturedtag">
 
 		<!-- begin post -->
 	<?php
 	if ($shi !== null) {
 		foreach ($shi as $row) {
 			?>
-			<div class="card">
+			<div class="card wikis col-5" id="<?= $row['wiki_id'] ?>">
 				<div class="row">
 					<div class="col-md-5 wrapthumbnail">
 						<a href="index.php?action=thepost&id=<?php echo $row["wiki_id"]?>">
@@ -50,18 +47,21 @@
 					<div class="col-md-7">
 						<div class="card-block">
 							<h2 class="card-title"><a href="index.php?action=thepost&id=<?php echo $row["wiki_id"]?>"><?php echo $row['title']; ?></a></h2>
-							<h4 class="card-text"><?php echo $row['content']; ?></h4>
-							<div class="metafooter">
+							<h4 class="card-text"><?php echo substr($row['content'], 0, 100) ?></h4>
+								<ul class="tags">
+									<?php if(isset($tags[$row['wiki_id']])) : ?>
+										<?php foreach($tags[$row['wiki_id']] as $tag) : ?>
+										<li><a><?= $tag ?></a></li>
+										<?php endforeach; ?>
+									<?php endif; ?>
+								</ul>
 								<div class="wrapfooter">
 									<span class="meta-footer-thumb">
 										<img class="author-thumb" src="https://static.vecteezy.com/system/resources/previews/008/442/086/non_2x/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg" alt="<?php echo $row['author_name']; ?>">
 									</span>
-									<span class="author-meta">
 										<span class="post-name"><a href=""><?php echo $row['author_name']; ?></a></span><br/>
 										<span class="post-date"><?php echo date('d F Y', strtotime($row['date_created'])); ?></span>
-									</span>
 								</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -102,5 +102,7 @@
 <?php
 	include 'foot.php';
 ?>
+
+<script src="css\jss.js"></script>
 </body>
 </html>

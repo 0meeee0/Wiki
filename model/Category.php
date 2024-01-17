@@ -9,14 +9,6 @@ class Category {
         $this->category_name = $category_name;
     }
 
-    // public function getCategoryId() {
-    //     return $this->category_id;
-    // }
-
-    // public function getCategoryName() {
-    //     return $this->category_name;
-    // }
-
 
     /**
      * Get the value of category_id

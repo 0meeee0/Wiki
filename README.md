@@ -14,3 +14,7 @@ Du côté du front office, l'accent sera mis sur une interface utilisateur, avec
 ​
 
 L'objectif principal est de faire un endroit où tout le monde peut travailler ensemble, créer, trouver et partager des wikis de manière facile et intéressante.
+
+
+Lien planification Trello: https://trello.com/invite/b/LfUzZecx/ATTId6989ede48b73e3abf782a884c34bab48DE5AD5F/brief-11-mehdi
+Lien Presentation Canva: https://www.canva.com/design/DAF5sIuift0/4jHKktNkEnKGAy5uDd3nTw/edit?utm_content=DAF5sIuift0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton

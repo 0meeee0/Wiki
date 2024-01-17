@@ -15,22 +15,54 @@ class TagDao {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function createTag(Tag $tag) {
-        // Implement the logic to insert a new tag into the database
+        public function createTag($TagName) {
+        $sql = "INSERT INTO tags(`tag_name`) VALUES (:tname)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':tname', $TagName, PDO::PARAM_STR);
+        $stmt->execute();
     }
 
-    public function getTagById($tag_id) {
-        // Implement the logic to retrieve a tag by tag_id from the database
+    public function add_tags_for_wiki($wiki_id, $tag_id) {
+        $sql = "INSERT INTO wiki_tags VALUES(?, ?)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$wiki_id, $tag_id]);
+
     }
 
-    public function updateTag(Tag $tag) {
-        // Implement the logic to update a tag in the database
+    public function modTags($new_tag_name, $tag_id){
+        $sql = "UPDATE tags SET tag_name = ? WHERE tag_id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$new_tag_name, $tag_id]);
     }
 
-    public function deleteTag($tag_id) {
-        // Implement the logic to delete a tag from the database
+    public function delete($tag_id){
+        $sql = "DELETE FROM `tags` WHERE tag_id = :tagid";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':tagid', $tag_id, PDO::PARAM_STR);
+        $stmt->execute();
     }
 
-    // Additional methods as needed
+    public function get_tags_for_wiki($wiki_id) {
+        $sql = "SELECT tags.* FROM tags
+        INNER JOIN wiki_tags ON wiki_tags.tag_id = tags.tag_id
+        INNER JOIN wikis ON wikis.wiki_id = wiki_tags.wiki_id
+        WHERE wikis.wiki_id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$wiki_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function delete_tags_for_wiki($wiki_id) {
+        $query = "DELETE FROM wiki_tags WHERE wiki_id = ?";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([$wiki_id]);
+    }
+
+    public function update_tags_for_wiki($wiki_id, $new_tag_id) {
+        
+        $sql = "INSERT INTO wiki_tags VALUES (?, ?)";
+        $stmt1 = $this->pdo->prepare($sql);
+        $stmt1->execute([$wiki_id, $new_tag_id]);
+    }
 }
 ?>

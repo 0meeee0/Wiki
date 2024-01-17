@@ -34,6 +34,9 @@
       
     </nav>
     <!-- partial -->
+    <div>
+
+    </div>
     <h1>users</h1>
     <div class="container">
 
@@ -77,48 +80,124 @@
       <div class=" col-6 mt-5">
                 <table id="" class="table table-striped">
                   <thead>
-                      <tr>
-                          <th>Categories</th>
-                          <th>Modify</th>
-                          <th>Delete</th>
-                      </tr>
-                  </thead>
+                    <tr>
+                        <th>Categories <a href="#" data-toggle="modal" data-target="#addCategoryModal">+</a></th>
+                        <th>Modify</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
                   <tbody>
-                    <?php
-                      var_dump($cat);
-                    ?>
                       <?php foreach ($cat as $category): ?>
                           <tr>
                               <td><?php echo $category['category_name']; ?></td>
-                              <td><button class="btn btn-primary">✎</button></td>
-                              <td><button class="btn btn-danger text-white">X</button></td>
+                              <td> <a href="index.php?action=modifycat&id=<?php echo $category['category_id']?>" data-toggle="modal" data-target="#modCatModal<?= $category['category_id'] ?>"><button class="btn btn-primary">✎</button></a> </td>
+                               <div class="modal fade" id="modCatModal<?= $category['category_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="modCatModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modCatModalLabel">Update Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form to modify tag -->
+                    <form action="index.php?action=modifycat&catg_id=<?= $category['category_id'] ?>" method="post">
+                        <label for="newTag">Modify Category:</label>
+                        <input type="text" name="modCat" id="newCat" value="<?= $category['category_name'] ?>" class="form-control" required>
+                        <br>
+                        <button type="submit" class="btn btn-warning">Apply</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+                              <td> <a href="index.php?action=delcat&id=<?php echo $category['category_id']?>"> <button class="btn btn-danger text-white">X</button></a></td>
                           </tr>
                       <?php endforeach; ?>
                   </tbody>
                 </table>
+
       </div>
       <!-- tags -->
       <div class=" col-6 mt-5">
                 <table id="" class="table table-bordered">
                   <thead>
                       <tr>
-                          <th>Tags</th>
+                          <th>Tags<a href="#" data-toggle="modal" data-target="#addTagModal">+</a></th>
                           <th>Modify</th>
                           <th>Delete</th>
                       </tr>
                   </thead>
                   <tbody>
-                      <?php foreach ($fadi as $user): ?>
+                      <?php foreach ($tags as $u): ?>
                           <tr>
-                              <td><?php echo $user['user_id']; ?></td>
-                              <td><button class="btn btn-primary">✎</button></td>
-                              <td><button class="btn btn-danger text-white">X</button></td>
+                              <td><?php echo $u['tag_name']; ?></td>
+                              <td><a href="index.php?action=modifytag&id=<?php echo $u['tag_id']?>" data-toggle="modal" data-target="#modTagModal<?= $u['tag_id'] ?>"><button class="btn btn-primary">✎</button></a></td>
+                              <div class="modal fade" id="modTagModal<?= $u['tag_id'] ?>" tabindex="-1" role="dialog" aria-labelledby="modTagModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modTagModalLabel">Update Tag</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Form to modify tag -->
+                                            <form action="index.php?action=modifytag&id_tag=<?= $u['tag_id'] ?>" method="post">
+                                                <label for="newTag">Modify Tag:</label>
+                                                <input type="text" name="modTag" id="newTag" value="<?php echo $u['tag_name']; ?>" class="form-control" required>
+                                                <br>
+                                                <button type="submit" class="btn btn-warning">Apply</button>
+                                            </form>
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <td><a href="index.php?action=deltag&id=<?php echo $u['tag_id']?>"> <button class="btn btn-danger text-white">X</button></a></td>
                           </tr>
                       <?php endforeach; ?>
                   </tbody>
                 </table>
       </div>
     </div>
+
+    <section class="mt-5 col-4 col-xs-6 mx-auto">
+
+      <div class="container">
+  
+        <div class="row">
+          <div class="stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <p class="card-title">Archived list</p>
+                <div class="table-responsive">
+                  <table id="user-listing" class="table">
+                    <thead>
+                        <tr>
+                            <th>title</th>
+                            <th>author</th>
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($shi as $row): ?>
+                            <tr>
+                                <td><?php echo $row['title']; ?></td>
+                                <td><?php echo $row['username']; ?></td>
+                                <td><a href="index.php?action=repost&id=<?= $row['wiki_id'] ?>" class="btn btn-success">repost</a></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     
 
@@ -133,6 +212,62 @@
         </footer>
         <!-- partial -->
       </div>
+
+       <!-- Add Category Modal -->
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCategoryModalLabel">Add Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form to add a new category -->
+                    <form action="index.php?action=addcat" method="post">
+                        <label for="newCategory">New Category:</label>
+                        <input type="text" name="newCategory" id="newCategory" class="form-control" required>
+                        <br>
+                        <button type="submit" class="btn btn-success">Add Category</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Tag Modal -->
+    <div class="modal fade" id="addTagModal" tabindex="-1" role="dialog" aria-labelledby="addTagModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTagModalLabel">Add Tag</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form to add a new tag -->
+                    <form action="index.php?action=addtag" method="post">
+                        <label for="newTag">New Tag:</label>
+                        <input type="text" name="newTag" id="newTag" class="form-control" required>
+                        <br>
+                        <button type="submit" class="btn btn-success">Add Tag</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modify Tag Modal -->
+    
+
+    <!-- modify Category Modal -->
+   
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <!-- container-scroller -->
 
   <!-- plugins:js -->

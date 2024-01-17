@@ -19,9 +19,7 @@ class UserDao {
 
             return $result;
         } catch (PDOException $e) {
-            // Handle database connection error
             echo "Error: " . $e->getMessage();
-            return array(); // Return an empty array on error
         }
     }
 
@@ -34,11 +32,11 @@ class UserDao {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
-        $hashedPassword = $user['password']; // Assuming the hashed password is stored in the 'password' column
+        $hashedPassword = $user['password'];
 
-        // Verify the password
         if (password_verify($password, $hashedPassword)) {
-            $_SESSION['username'] = $user['username'];
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['role'] = $user['role'];
             if($user['role'] == "auteur"){
                 include "index.php?action=showhome";
                 header("Location: index.php?action=showhome");
@@ -49,20 +47,20 @@ class UserDao {
             }
         } else {
             // Incorrect password
-            header("Location: index.php");
-            exit(); // Add exit to stop script execution after redirect
+            // header("Location: index.php");
+            echo "Incorrect Password";
         }
     } else {
         // User not found
-        header("Location: index.php");
-        exit(); // Add exit to stop script execution after redirect
+        echo "User not found, please register";
+
     }
 }
 
 
 
     public function singup($username, $email, $password) {
-
+    try{
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $role = 'auteur';
 
@@ -75,35 +73,16 @@ class UserDao {
         $stmt->bindParam(':role', $role, PDO::PARAM_STR);
         $stmt->execute();
 
-        // Check if the user was successfully created
         if ($stmt->rowCount() > 0) {
-            echo "User created successfully!";
-            header("Location:index.php");
-        } else {
+                header("Location:index.php?action=log_in");
+            } else {
             echo "Error creating user.";
+            }
         }
-    }
+        catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
 
-
-    public function getUserById($user_id) {
-        // Implement the logic to retrieve a user by user_id from the database
     }
-
-    public function getUserByEmail($email) {
-        // Implement the logic to retrieve a user by user_id from the database
-    }
-
-    public function getUserByUsername(User $user) {
-        // Implement the logic to update a user in the database
-    }
-    public function updateUser(User $user) {
-        // Implement the logic to update a user in the database
-    }
-
-    public function deleteUser($user_id) {
-        // Implement the logic to delete a user from the database
-    }
-
-    // Additional methods as needed
 }
 ?>

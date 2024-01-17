@@ -23,7 +23,7 @@
 							<form action="index.php?action=login" class="login-form" method="post">
 								<div class="form-group">
 									<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-envelope"></span></div>
-									<input type="text" name="email" class="form-control" placeholder="Email" required>
+									<input type="email" name="email" class="form-control" placeholder="Email" required>
 								</div>
 								<div class="form-group">
 									<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-lock"></span></div>

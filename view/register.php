@@ -21,23 +21,24 @@
 							<p class="text-center">We welcome our new users with open arms</p>
 
 							<!-- form -->
-							<form action="index.php?action=signup" class="login-form" method="post">
-								<div class="form-group">
+							<form action="index.php?action=signup" class="sign-up-form" method="post">
+								<div class="form-group ">
 									<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-user"></span></div>
-									<input type="text" name="username" class="form-control" placeholder="Username" required>
+									<input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
 								</div>
 								<div class="form-group">
 									<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-envelope"></span></div>
-									<input type="text" name="email" class="form-control" placeholder="Email" required>
+									<input type="email" id="email" name="email" class="form-control" placeholder="Email"  required>
 								</div>
 								<div class="form-group">
 									<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-lock"></span></div>
-									<input type="password" name="password" class="form-control" placeholder="Password" required>
+									<input type="password" id="password" name="password" class="form-control" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" required>
 								</div>
 								<div class="form-group">
 									<button type="submit" class="btn form-control btn-primary rounded submit px-3">Get Started</button>
 								</div>
 							</form>
+
 							<div class="w-100 text-center mt-4 text">
 								<p class="mb-0">Already have an account?</p>
 								<a href="index.php?action=ak">Log in</a>
@@ -47,7 +48,7 @@
 				</div>
 			</div>
 		</section>
-
+		<script src="css\assets\js\validation_sign_up.js"></script>
 		<script src="js/jquery.min.js"></script>
 		<script src="js/popper.js"></script>
 		<script src="js/bootstrap.min.js"></script>
